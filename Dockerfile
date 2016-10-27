@@ -1,8 +1,9 @@
-FROM scratch
-MAINTAINER Platform Automation
+FROM alpine:3.4
 
-ADD pause /pause
-ADD newrelic /newrelic
+WORKDIR /
+RUN wget -q -O nr.zip http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-java/3.32.0/newrelic-java-3.32.0.zip
+RUN sha1sum -c newrelic-java.sha1 && unzip nr.zip
 VOLUME /newrelic
 
-CMD ["/pause"]
+CMD true
+
